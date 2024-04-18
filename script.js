@@ -197,8 +197,8 @@ function renderTable() {
                           <td>${produtosBebidas[index].volume}</td>
                           <td>${produtosBebidas[index].preco}</td>
                           <td>${produtosBebidas[index].estoque}</td>
-                          <td><button class="btn btn-warning">Editar</button></td>
-                          <td><button class="btn btn-danger">Excluir</button></td>
+                          <td><button onclick ="renderEditModal()" class="btn btn-warning">Editar</button></td>
+                          <td><button onclick ="deleteData(${produtosBebidas[index].id})"class="btn btn-danger">Excluir</button></td>
                           `
       tbody.appendChild(row)
   }
@@ -280,7 +280,7 @@ function renderEditModal() {
   div.innerHTML = `<div id="createModal" class="modal-content">
   <form>
       <div class="form-group">
-          <input type="text" class="form-control" id="edittId" aria-describedby="emailHelp" placeholder="Id">
+          <input type="text" class="form-control" id="editId" aria-describedby="emailHelp" placeholder="Id">
       </div>
       <div class="form-group">
           <input type="text" class="form-control" id="editNome" aria-describedby="emailHelp" placeholder="Digite seu nome">
@@ -300,7 +300,7 @@ function renderEditModal() {
       <div class="form-group">
           <input type="text" class="form-control" id="editEstoque" aria-describedby="emailHelp" placeholder="Digite a unidade">
       </div>
-      <button type="button" class="btn btn-primary" id = "enviar" onclick="criarDados()">Enviar</button>
+      <button type="button" class="btn btn-primary" id = "enviar" onclick="editData()">Enviar</button>
       <button type="button" onclick="removeEditModal()"class="btn btn-primary" id = "remover">Remover</button>
   </form>
   </div>`
@@ -322,5 +322,32 @@ function renderEditModal() {
     let volume = document.querySelector("#editVolume").value
     let preco = document.querySelector("#editPreco").value
     let estoque = document.querySelector("#editEstoque").value
-  
+    let body = document.querySelector("tbody")
+
+    const index = produtosBebidas.findIndex(item => item.id == id)
+
+    produtosBebidas[index] ={
+      id:id,
+      nome:nome,
+      tipo:tipo,
+      marca:marca,
+      volume:volume,
+      preco:preco,
+      estoque:estoque
+    }
+
+    body.innerHTML = " "
+    renderTable()
+    removeEditModal()
+  }
+
+
+  function deleteData(id) {
+    let body = document.querySelector("tbody")
+    const index = produtosBebidas.findIndex(item => item.id == id)
+
+    produtosBebidas.splice(index,1)
+
+    body.innerHTML = " "
+    renderTable ()
   }
