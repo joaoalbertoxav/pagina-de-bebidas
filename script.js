@@ -1,5 +1,5 @@
-const produtosBebidas = [
-  {
+const ProdutosBebidas = [
+{
     id: 1,
     nome: "Teachers",
     tipo: "Destilado",
@@ -188,17 +188,17 @@ let tbody = document.querySelector("tbody")
 
 function renderTable() {
 
-  for (let index = 0; index < produtosBebidas.length; index++) {
+  for (let index = 0; index < ProdutosBebidas.length; index++) {
       let row = document.createElement("tr")
-      row.innerHTML += `  <td>${produtosBebidas[index].id}</td>
-                          <td>${produtosBebidas[index].nome}</td>
-                          <td>${produtosBebidas[index].tipo}</td>
-                          <td>${produtosBebidas[index].marca}</td>
-                          <td>${produtosBebidas[index].volume}</td>
-                          <td>${produtosBebidas[index].preco}</td>
-                          <td>${produtosBebidas[index].estoque}</td>
+      row.innerHTML += `  <td>${ProdutosBebidas[index].id}</td>
+                          <td>${ProdutosBebidas[index].nome}</td>
+                          <td>${ProdutosBebidas[index].tipo}</td>
+                          <td>${ProdutosBebidas[index].marca}</td>
+                          <td>${ProdutosBebidas[index].volume}</td>
+                          <td>${ProdutosBebidas[index].preco}</td>
+                          <td>${ProdutosBebidas[index].estoque}</td>
                           <td><button onclick ="renderEditModal()" class="btn btn-warning">Editar</button></td>
-                          <td><button onclick ="deleteData(${produtosBebidas[index].id})"class="btn btn-danger">Excluir</button></td>
+                          <td><button onclick ="deleteData(${ProdutosBebidas[index].id})"class="btn btn-danger">Excluir</button></td>
                           `
       tbody.appendChild(row)
   }
@@ -259,7 +259,7 @@ function criarDados() {
 
   tbody.innerHTML = " "
 
-  produtosBebidas.push({
+  ProdutosBebidas.push({
       id:id,
       nome:nome,
       tipo:tipo,
@@ -324,9 +324,9 @@ function renderEditModal() {
     let estoque = document.querySelector("#editEstoque").value
     let body = document.querySelector("tbody")
 
-    const index = produtosBebidas.findIndex(item => item.id == id)
+    const index = ProdutosBebidas.findIndex(item => item.id == id)
 
-    produtosBebidas[index] ={
+    ProdutosBebidas[index] ={
       id:id,
       nome:nome,
       tipo:tipo,
@@ -344,9 +344,9 @@ function renderEditModal() {
 
   function deleteData(id) {
     let body = document.querySelector("tbody")
-    const index = produtosBebidas.findIndex(item => item.id == id)
+    const index = ProdutosBebidas.findIndex(item => item.id == id)
 
-    produtosBebidas.splice(index,1)
+    ProdutosBebidas.splice(index,1)
 
     body.innerHTML = " "
     renderTable ()
